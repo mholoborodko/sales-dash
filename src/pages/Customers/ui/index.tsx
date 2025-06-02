@@ -44,7 +44,7 @@ export const CustomersPage = () => {
       <LoaderContainer
         customLoader={<TableLoader columns={8} />}
         isLoading={loading}
-        loaderClassName="mt-4"
+        loaderClassName="mt-3"
       >
         <Table className="mt-3" columns={customerColumns} data={data || []} />
       </LoaderContainer>
