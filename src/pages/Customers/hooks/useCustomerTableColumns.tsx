@@ -1,0 +1,95 @@
+import { createColumnHelper } from '@tanstack/react-table';
+import { useMemo } from 'react';
+
+import { Customer } from '@/entities/Customer';
+import { DateFormat } from '@/shared/constants';
+import { Badge } from '@/shared/ui';
+import { Avatar } from '@/shared/ui/Avatar';
+import { BadgeVariant } from '@/shared/ui/Badge';
+import { toDateFormat } from '@/shared/utils';
+
+const columnHelper = createColumnHelper<Customer>();
+
+interface UseCustomerTableColumnsProps {
+  openCustomerDetails: () => void;
+}
+
+export const useCustomerTableColumns = ({
+  openCustomerDetails,
+}: UseCustomerTableColumnsProps) => {
+  return useMemo(() => {
+    return [
+      columnHelper.display({
+        header: 'Full Name',
+        cell: ctx => {
+          const {
+            customer: { photo, fullName },
+          } = ctx.row.original;
+          return (
+            <div className="flex items-center gap-2.5">
+              <Avatar src={photo} />
+              <span
+                className="hover:opacity-80 line-clamp-1"
+                onClick={openCustomerDetails}
+              >
+                {fullName}
+              </span>
+            </div>
+          );
+        },
+        meta: {
+          headerClassName: 'text-left',
+          cellClassName:
+            'font-medium underline underline-offset-[3px] cursor-pointer',
+        },
+      }),
+      columnHelper.accessor('email', {
+        header: 'Email',
+        cell: ({ getValue }) => <span>{getValue().toLowerCase()}</span>,
+        meta: {
+          headerClassName: 'text-left',
+          cellClassName: 'text-blue-500',
+        },
+      }),
+      columnHelper.accessor('phone', {
+        header: 'Phone',
+        cell: ({ getValue }) => getValue(),
+      }),
+      columnHelper.accessor('company', {
+        header: 'Company',
+        cell: ({ getValue }) => getValue(),
+      }),
+      columnHelper.accessor('country', {
+        header: 'Country',
+        cell: ({ getValue }) => getValue(),
+      }),
+      columnHelper.accessor('city', {
+        header: 'City',
+        cell: ({ getValue }) => getValue(),
+      }),
+      columnHelper.accessor('createdAt', {
+        header: 'Created At',
+        cell: ({ getValue }) => (
+          <span>{toDateFormat(getValue(), DateFormat.MONTH_DAY_YEAR)}</span>
+        ),
+        meta: {
+          headerClassName: 'text-left',
+          cellClassName: 'text-gray-500 whitespace-nowrap',
+        },
+      }),
+      columnHelper.accessor('isActive', {
+        header: 'Status',
+        cell: ({ getValue }) => (
+          <Badge
+            label={getValue() ? 'Active' : 'Inactive'}
+            variant={getValue() ? BadgeVariant.GREEN : BadgeVariant.RED}
+          />
+        ),
+        meta: {
+          headerClassName: 'text-center',
+          cellClassName: 'text-center',
+        },
+      }),
+    ];
+  }, [openCustomerDetails]);
+};

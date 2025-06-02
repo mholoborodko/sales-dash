@@ -1,2 +1,10 @@
 export { Button } from './Button';
 export { Icon } from './Icon';
+export { Table } from './Table';
+export { TableLoader } from './TableLoader';
+export { Badge } from './Badge';
+export { Skeleton } from './Skeleton';
+export { LoaderContainer } from './LoaderContainer';
+export { Loader } from './Loader';
+export { SideDrawer } from './SideDrawer';
+export { Avatar } from './Avatar';

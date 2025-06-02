@@ -20,7 +20,10 @@ export const DashboardPage = () => {
   return (
     <div className="grid grid-cols-2 gap-[50px]">
       {[1, 2, 3, 4].map((_, index) => (
-        <div key={index} className="w-full h-64 bg-white rounded-xl shadow p-4">
+        <div
+          key={index}
+          className="w-full h-[300px] bg-white rounded-xl shadow-md p-10"
+        >
           <h2 className="text-lg font-semibold mb-4">Monthly Sales</h2>
           <ResponsiveContainer height="100%" width="100%">
             <BarChart data={data}>
