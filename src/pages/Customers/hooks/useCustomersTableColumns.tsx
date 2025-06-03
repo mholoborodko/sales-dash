@@ -10,13 +10,13 @@ import { toDateFormat } from '@/shared/utils';
 
 const columnHelper = createColumnHelper<Customer>();
 
-interface UseCustomerTableColumnsProps {
+interface UseCustomersTableColumnsProps {
   openCustomerDetails: () => void;
 }
 
-export const useCustomerTableColumns = ({
+export const useCustomersTableColumns = ({
   openCustomerDetails,
-}: UseCustomerTableColumnsProps) => {
+}: UseCustomersTableColumnsProps) => {
   return useMemo(() => {
     return [
       columnHelper.display({

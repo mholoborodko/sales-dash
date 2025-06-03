@@ -33,7 +33,7 @@ export const Badge: React.FC<BadgeProps> = ({
   return (
     <span
       className={clsx(
-        'inline-block px-2 py-1 text-xs font-semibold rounded-md min-w-[80px]',
+        'inline-block text-center px-2 py-1 text-xs font-semibold rounded-md min-w-[80px]',
         badgeStyles[variant],
         className
       )}

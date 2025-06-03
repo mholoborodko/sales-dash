@@ -5,7 +5,7 @@ import { CustomerDetailsDrawer } from '@/features';
 import { useToggle } from '@/shared/hooks';
 import { Button, LoaderContainer, Table, TableLoader } from '@/shared/ui';
 
-import { useCustomerTableColumns } from '../hooks/useCustomerTableColumns';
+import { useCustomersTableColumns } from '../hooks/useCustomersTableColumns';
 
 const data = Array.from({ length: 20 }, () => ({
   id: faker.string.uuid(),
@@ -25,7 +25,7 @@ const data = Array.from({ length: 20 }, () => ({
 export const CustomersPage = () => {
   const customerDetailsDrawer = useToggle(false);
 
-  const customerColumns = useCustomerTableColumns({
+  const customerColumns = useCustomersTableColumns({
     openCustomerDetails: customerDetailsDrawer.on,
   });
 
