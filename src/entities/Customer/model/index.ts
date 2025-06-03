@@ -13,3 +13,8 @@ export type Customer = {
   createdAt: string;
   isActive: boolean;
 };
+
+export enum CustomerStatus {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+}

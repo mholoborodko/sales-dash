@@ -1,12 +1,12 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { useMemo } from 'react';
 
-import { Customer } from '@/entities/Customer';
+import { Customer, CustomerStatus } from '@/entities/Customer';
 import { DateFormat } from '@/shared/constants';
 import { Badge } from '@/shared/ui';
 import { Avatar } from '@/shared/ui/Avatar';
 import { BadgeVariant } from '@/shared/ui/Badge';
-import { toDateFormat } from '@/shared/utils';
+import { convertEnumToString, toDateFormat } from '@/shared/utils';
 
 const columnHelper = createColumnHelper<Customer>();
 
@@ -81,7 +81,11 @@ export const useCustomersTableColumns = ({
         header: 'Status',
         cell: ({ getValue }) => (
           <Badge
-            label={getValue() ? 'Active' : 'Inactive'}
+            label={
+              getValue()
+                ? convertEnumToString(CustomerStatus.ACTIVE)
+                : convertEnumToString(CustomerStatus.INACTIVE)
+            }
             variant={getValue() ? BadgeVariant.GREEN : BadgeVariant.RED}
           />
         ),

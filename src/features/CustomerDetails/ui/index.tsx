@@ -1,9 +1,10 @@
 import { format } from 'date-fns';
 
-import { Customer } from '@/entities/Customer';
+import { Customer, CustomerStatus } from '@/entities/Customer';
 import { DateFormat } from '@/shared/constants';
 import { Avatar, Badge, SideDrawer } from '@/shared/ui';
 import { BadgeVariant } from '@/shared/ui/Badge';
+import { convertEnumToString } from '@/shared/utils';
 
 interface CustomerDetailsDrawerProps {
   customer: Customer;
@@ -53,7 +54,11 @@ export const CustomerDetailsDrawer = ({
             label="Status"
             value={
               <Badge
-                label={customer.isActive ? 'Active' : 'Inactive'}
+                label={
+                  customer.isActive
+                    ? convertEnumToString(CustomerStatus.ACTIVE)
+                    : convertEnumToString(CustomerStatus.INACTIVE)
+                }
                 variant={
                   customer.isActive ? BadgeVariant.GREEN : BadgeVariant.RED
                 }
