@@ -8,18 +8,33 @@ import { Avatar } from '@/shared/ui/Avatar';
 import {
   convertEnumToString,
   convertToCurrencyString,
+  getOrderStatusColor,
   toDateFormat,
 } from '@/shared/utils';
 
-import { getOrderStatusColor } from '../utils';
-
 const columnHelper = createColumnHelper<Order>();
 
-export const useOrdersTableColumns = () => {
+interface UseOrdersTableColumnsProps {
+  openOrderDetails: () => void;
+}
+
+export const useOrdersTableColumns = ({
+  openOrderDetails,
+}: UseOrdersTableColumnsProps) => {
   return useMemo(() => {
     return [
       columnHelper.accessor('id', {
         header: 'Order ID',
+        cell: ({ getValue }) => (
+          <span onClick={openOrderDetails}>
+            #{getValue().toString().padStart(6, '0')}
+          </span>
+        ),
+        meta: {
+          headerClassName: 'text-left',
+          cellClassName:
+            'font-medium underline underline-offset-[3px] cursor-pointer',
+        },
       }),
       columnHelper.display({
         header: 'Customer',
@@ -62,7 +77,7 @@ export const useOrdersTableColumns = () => {
         cell: ({ getValue }) => convertEnumToString(getValue()),
       }),
       columnHelper.accessor('total', {
-        header: 'Price',
+        header: 'Total',
         cell: ({ getValue }) => (
           <span>{convertToCurrencyString(getValue())}</span>
         ),
@@ -85,5 +100,5 @@ export const useOrdersTableColumns = () => {
         },
       }),
     ];
-  }, []);
+  }, [openOrderDetails]);
 };

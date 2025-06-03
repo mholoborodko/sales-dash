@@ -2,12 +2,14 @@ import { faker } from '@faker-js/faker';
 import { useEffect, useState } from 'react';
 
 import { OrderStatus, PaymentMethod } from '@/entities/Order';
+import { OrderDetailsDrawer } from '@/features';
+import { useToggle } from '@/shared/hooks';
 import { Button, LoaderContainer, Table, TableLoader } from '@/shared/ui';
 
 import { useOrdersTableColumns } from '../hooks/useOrdersTableColumns';
 
-const data = Array.from({ length: 20 }, () => ({
-  id: faker.number.int({ min: 100000, max: 999999 }),
+const data = Array.from({ length: 10 }, () => ({
+  id: faker.number.int({ min: 1000, max: 9999 }),
   customer: {
     fullName: faker.person.fullName(),
     photo: Math.random() < 0.8 ? faker.image.avatar() : null,
@@ -23,7 +25,11 @@ const data = Array.from({ length: 20 }, () => ({
 }));
 
 export const OrdersPage = () => {
-  const ordersColumns = useOrdersTableColumns();
+  const orderDetailsDrawer = useToggle(false);
+
+  const ordersColumns = useOrdersTableColumns({
+    openOrderDetails: orderDetailsDrawer.on,
+  });
 
   const [loading, setLoading] = useState(true);
 
@@ -45,6 +51,12 @@ export const OrdersPage = () => {
       >
         <Table className="mt-3" columns={ordersColumns} data={data || []} />
       </LoaderContainer>
+
+      <OrderDetailsDrawer
+        isOpen={orderDetailsDrawer.value}
+        order={data[0]}
+        onClose={orderDetailsDrawer.off}
+      />
     </div>
   );
 };
