@@ -5,12 +5,17 @@ import { useEffect, useState } from 'react';
 import {
   ProductCard,
   ProductsGridSkeleton,
+  ProductStatus,
   ProductViewMode,
 } from '@/entities/Product';
-import { Icon, LoaderContainer } from '@/shared/ui';
+import { ProductDetailsDrawer } from '@/features';
+import { useToggle } from '@/shared/hooks';
+import { Icon, LoaderContainer, Table, TableLoader } from '@/shared/ui';
+
+import { useProductsTableColumns } from '../hooks/useProductsTableColumns';
 
 export const data = Array.from({ length: 20 }, () => ({
-  id: faker.string.uuid(),
+  id: faker.number.int({ min: 1000, max: 9999 }),
   name: faker.commerce.productName(),
   description: faker.commerce.productDescription(),
   image: `https://picsum.photos/seed/${Math.floor(
@@ -19,16 +24,29 @@ export const data = Array.from({ length: 20 }, () => ({
   price: parseFloat(faker.commerce.price({ min: 10, max: 1000 })),
   category: faker.commerce.department(),
   createdAt: faker.date.past({ years: 1 }).toISOString(),
+  status: faker.helpers.arrayElement(
+    Object.keys(ProductStatus)
+  ) as ProductStatus,
 }));
 
 export const ProductsPage = () => {
   const [view, setView] = useState<ProductViewMode>(ProductViewMode.GRID);
 
+  const productDetailsDrawer = useToggle(false);
+
+  const ordersColumns = useProductsTableColumns({
+    openProductDetails: productDetailsDrawer.on,
+  });
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
-  }, [loading]);
+    setLoading(true);
+
+    const timer = setTimeout(() => setLoading(false), 1000);
+
+    return () => clearTimeout(timer);
+  }, [view]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -68,14 +86,31 @@ export const ProductsPage = () => {
         <LoaderContainer
           customLoader={<ProductsGridSkeleton />}
           isLoading={loading}
+          loaderClassName="mt-2"
         >
-          <div className="grid grid-cols-4 gap-4">
+          <div className="mt-2 grid grid-cols-4 gap-4">
             {data.map(product => (
               <ProductCard key={product.id} {...product} />
             ))}
           </div>
         </LoaderContainer>
       )}
+
+      {view === ProductViewMode.TABLE && (
+        <LoaderContainer
+          customLoader={<TableLoader columns={6} />}
+          isLoading={loading}
+          loaderClassName="mt-3"
+        >
+          <Table className="mt-3" columns={ordersColumns} data={data || []} />
+        </LoaderContainer>
+      )}
+
+      <ProductDetailsDrawer
+        isOpen={productDetailsDrawer.value}
+        product={data[0]}
+        onClose={productDetailsDrawer.off}
+      />
     </div>
   );
 };

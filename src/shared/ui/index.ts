@@ -8,3 +8,5 @@ export { LoaderContainer } from './LoaderContainer';
 export { Loader } from './Loader';
 export { SideDrawer } from './SideDrawer';
 export { Avatar } from './Avatar';
+export { DetailsModalSection } from './DetailsModalSection';
+export { DetailsModalInfoRow } from './DetailsModalInfoRow';

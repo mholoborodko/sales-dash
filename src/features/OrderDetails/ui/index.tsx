@@ -2,7 +2,13 @@ import { format } from 'date-fns';
 
 import { Order } from '@/entities/Order';
 import { DateFormat } from '@/shared/constants';
-import { Avatar, Badge, SideDrawer } from '@/shared/ui';
+import {
+  Avatar,
+  Badge,
+  DetailsModalInfoRow,
+  DetailsModalSection,
+  SideDrawer,
+} from '@/shared/ui';
 import {
   convertEnumToString,
   convertToCurrencyString,
@@ -49,53 +55,25 @@ export const OrderDetailsDrawer = ({
           </div>
         </div>
 
-        <Section title="Customer">
+        <DetailsModalSection title="Customer">
           <div className="flex items-center gap-3 col-span-2">
             <Avatar size={40} src={order.customer.photo} />
             <div className="text-sm text-black">{order.customer.fullName}</div>
           </div>
-        </Section>
+        </DetailsModalSection>
 
-        <Section title="Payment Information">
-          <InfoRow
+        <DetailsModalSection title="Payment Information">
+          <DetailsModalInfoRow
             label="Payment Method"
             value={convertEnumToString(order.paymentMethod)}
           />
-        </Section>
+        </DetailsModalSection>
 
-        <Section title="Shipping Address">
-          <InfoRow label="Country" value={order.country} />
-          <InfoRow label="City" value={order.city} />
-        </Section>
+        <DetailsModalSection title="Shipping Address">
+          <DetailsModalInfoRow label="Country" value={order.country} />
+          <DetailsModalInfoRow label="City" value={order.city} />
+        </DetailsModalSection>
       </div>
     </SideDrawer>
   );
 };
-
-const Section = ({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) => (
-  <div className="space-y-2">
-    <div className="text-sm font-semibold text-gray-600">{title}</div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4">
-      {children}
-    </div>
-  </div>
-);
-
-const InfoRow = ({
-  label,
-  value,
-}: {
-  label: string;
-  value: React.ReactNode;
-}) => (
-  <div>
-    <div className="text-xs text-gray-500 mb-1">{label}</div>
-    <div className="text-sm text-black break-all">{value}</div>
-  </div>
-);

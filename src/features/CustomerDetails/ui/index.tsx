@@ -2,7 +2,13 @@ import { format } from 'date-fns';
 
 import { Customer, CustomerStatus } from '@/entities/Customer';
 import { DateFormat } from '@/shared/constants';
-import { Avatar, Badge, SideDrawer } from '@/shared/ui';
+import {
+  Avatar,
+  Badge,
+  DetailsModalInfoRow,
+  DetailsModalSection,
+  SideDrawer,
+} from '@/shared/ui';
 import { BadgeVariant } from '@/shared/ui/Badge';
 import { convertEnumToString } from '@/shared/utils';
 
@@ -38,19 +44,22 @@ export const CustomerDetailsDrawer = ({
           </div>
         </div>
 
-        <Section title="Contact Information">
-          <InfoRow label="Email" value={customer.email.toLowerCase()} />
-          <InfoRow label="Phone" value={customer.phone} />
-        </Section>
+        <DetailsModalSection title="Contact Information">
+          <DetailsModalInfoRow
+            label="Email"
+            value={customer.email.toLowerCase()}
+          />
+          <DetailsModalInfoRow label="Phone" value={customer.phone} />
+        </DetailsModalSection>
 
-        <Section title="Location">
-          <InfoRow label="Country" value={customer.country} />
-          <InfoRow label="City" value={customer.city} />
-        </Section>
+        <DetailsModalSection title="Location">
+          <DetailsModalInfoRow label="Country" value={customer.country} />
+          <DetailsModalInfoRow label="City" value={customer.city} />
+        </DetailsModalSection>
 
-        <Section title="Additional Details">
-          <InfoRow label="Company" value={customer.company} />
-          <InfoRow
+        <DetailsModalSection title="Additional Details">
+          <DetailsModalInfoRow label="Company" value={customer.company} />
+          <DetailsModalInfoRow
             label="Status"
             value={
               <Badge
@@ -65,36 +74,8 @@ export const CustomerDetailsDrawer = ({
               />
             }
           />
-        </Section>
+        </DetailsModalSection>
       </div>
     </SideDrawer>
   );
 };
-
-const Section = ({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) => (
-  <div className="space-y-2">
-    <div className="text-sm font-semibold text-gray-600">{title}</div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4">
-      {children}
-    </div>
-  </div>
-);
-
-const InfoRow = ({
-  label,
-  value,
-}: {
-  label: string;
-  value: React.ReactNode;
-}) => (
-  <div>
-    <div className="text-xs text-gray-500 mb-1">{label}</div>
-    <div className="text-sm text-black break-all">{value}</div>
-  </div>
-);
