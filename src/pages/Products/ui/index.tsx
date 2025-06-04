@@ -52,7 +52,7 @@ export const ProductsPage = () => {
     <div className="flex flex-col gap-4">
       <div className="flex items-center  justify-between">
         <h2 className="text-lg font-semibold">Products</h2>
-        <div className="flex items-center rounded-md border bg-white shadow-sm">
+        <div className=" h-[38.5px] flex items-center rounded-md border bg-white shadow-sm">
           <button
             aria-label="Grid view"
             className={clsx(
@@ -100,9 +100,9 @@ export const ProductsPage = () => {
         <LoaderContainer
           customLoader={<TableLoader columns={6} />}
           isLoading={loading}
-          loaderClassName="mt-3"
+          loaderClassName="mt-2"
         >
-          <Table className="mt-3" columns={ordersColumns} data={data || []} />
+          <Table className="mt-2" columns={ordersColumns} data={data || []} />
         </LoaderContainer>
       )}
 
