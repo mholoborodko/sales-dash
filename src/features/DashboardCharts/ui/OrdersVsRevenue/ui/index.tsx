@@ -13,7 +13,7 @@ import {
 
 import { DashboardChartSection } from '@/features/DashboardCharts';
 
-const ordersVsRevenue = Array.from({ length: 20 }).map(() => ({
+const ordersVsRevenue = Array.from({ length: 40 }).map(() => ({
   orders: faker.number.int({ min: 50, max: 500 }),
   revenue: faker.number.int({ min: 1000, max: 10000 }),
 }));
