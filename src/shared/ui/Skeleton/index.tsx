@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { FC } from 'react';
 
 interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -8,7 +8,7 @@ interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   circle?: boolean;
 }
 
-export const Skeleton: React.FC<SkeletonProps> = ({
+export const Skeleton: FC<SkeletonProps> = ({
   className,
   width = '100%',
   height = '1em',

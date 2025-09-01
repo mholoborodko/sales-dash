@@ -1,4 +1,6 @@
-export const ProductsGridSkeleton = () => {
+import { FC } from 'react';
+
+export const ProductsGridSkeleton: FC = () => {
   return (
     <div className="grid grid-cols-4 gap-4">
       {new Array(20).fill(null).map((_, index) => (

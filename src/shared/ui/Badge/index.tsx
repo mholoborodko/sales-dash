@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { FC } from 'react';
 
 export enum BadgeVariant {
   GRAY = 'GRAY',
@@ -25,7 +25,7 @@ interface BadgeProps {
   className?: string;
 }
 
-export const Badge: React.FC<BadgeProps> = ({
+export const Badge: FC<BadgeProps> = ({
   variant = BadgeVariant.GRAY,
   label,
   className,

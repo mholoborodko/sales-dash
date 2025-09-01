@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { OrderStatus, PaymentMethod } from '@/entities/Order';
 import { OrderDetailsDrawer } from '@/features';
@@ -24,7 +24,7 @@ const data = Array.from({ length: 10 }, () => ({
   ) as PaymentMethod,
 }));
 
-export const OrdersPage = () => {
+export const OrdersPage: FC = () => {
   const orderDetailsDrawer = useToggle(false);
 
   const ordersColumns = useOrdersTableColumns({

@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { FC } from 'react';
 
 import { Customer, CustomerStatus } from '@/entities/Customer';
 import { DateFormat } from '@/shared/constants';
@@ -18,11 +19,11 @@ interface CustomerDetailsDrawerProps {
   onClose: () => void;
 }
 
-export const CustomerDetailsDrawer = ({
+export const CustomerDetailsDrawer: FC<CustomerDetailsDrawerProps> = ({
   customer,
   isOpen,
   onClose,
-}: CustomerDetailsDrawerProps) => {
+}) => {
   return (
     <SideDrawer
       isOpen={isOpen}

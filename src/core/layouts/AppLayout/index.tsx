@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Sidebar } from '@/widgets/Sidebar';
@@ -9,7 +10,7 @@ const items = [
   { label: 'Products', to: '/products', icon: 'products' },
 ];
 
-export const AppLayout = () => {
+export const AppLayout: FC = () => {
   return (
     <div className="flex">
       <Sidebar items={items} />

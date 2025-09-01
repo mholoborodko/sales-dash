@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 import { Skeleton } from '../Skeleton';
 
 interface TableLoaderProps {
@@ -5,7 +7,7 @@ interface TableLoaderProps {
   rows?: number;
 }
 
-export const TableLoader = ({ columns, rows = 30 }: TableLoaderProps) => {
+export const TableLoader: FC<TableLoaderProps> = ({ columns, rows = 30 }) => {
   return (
     <div className="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
       <table className="min-w-full text-[10px] text-left border-collapse w-full table-fixed">

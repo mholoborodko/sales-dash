@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { CustomerDetailsDrawer } from '@/features';
 import { useToggle } from '@/shared/hooks';
@@ -22,7 +22,7 @@ const data = Array.from({ length: 20 }, () => ({
   isActive: faker.datatype.boolean(),
 }));
 
-export const CustomersPage = () => {
+export const CustomersPage: FC = () => {
   const customerDetailsDrawer = useToggle(false);
 
   const customerColumns = useCustomersTableColumns({

@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { FC } from 'react';
 
 import { Order } from '@/entities/Order';
 import { DateFormat } from '@/shared/constants';
@@ -21,11 +22,11 @@ interface OrderDetailsDrawerProps {
   onClose: () => void;
 }
 
-export const OrderDetailsDrawer = ({
+export const OrderDetailsDrawer: FC<OrderDetailsDrawerProps> = ({
   order,
   isOpen,
   onClose,
-}: OrderDetailsDrawerProps) => {
+}) => {
   return (
     <SideDrawer
       isOpen={isOpen}

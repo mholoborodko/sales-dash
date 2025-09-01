@@ -1,9 +1,13 @@
-export const DetailsModalSection = ({
-  title,
-  children,
-}: {
+import { FC } from 'react';
+
+interface DetailsModalSectionProps {
   title: string;
   children: React.ReactNode;
+}
+
+export const DetailsModalSection: FC<DetailsModalSectionProps> = ({
+  title,
+  children,
 }) => (
   <div className="space-y-2">
     <div className="text-sm font-semibold text-gray-600">{title}</div>

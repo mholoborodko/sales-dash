@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import {
   ProductCard,
@@ -29,7 +29,7 @@ export const data = Array.from({ length: 20 }, () => ({
   ) as ProductStatus,
 }));
 
-export const ProductsPage = () => {
+export const ProductsPage: FC = () => {
   const [view, setView] = useState<ProductViewMode>(ProductViewMode.GRID);
 
   const productDetailsDrawer = useToggle(false);

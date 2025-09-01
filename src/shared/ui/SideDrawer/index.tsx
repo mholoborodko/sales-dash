@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { FC } from 'react';
 import Drawer from 'react-modern-drawer';
 
 import 'react-modern-drawer/dist/index.css';
@@ -14,7 +14,7 @@ interface SideDrawerProps {
   width?: string;
 }
 
-export const SideDrawer: React.FC<SideDrawerProps> = ({
+export const SideDrawer: FC<SideDrawerProps> = ({
   isOpen,
   onClose,
   children,

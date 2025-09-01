@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 interface IconProps {
   name: string;
@@ -9,7 +9,7 @@ interface IconProps {
 
 const icons = import.meta.glob('@/shared/assets/icons/*.svg', { as: 'raw' });
 
-export const Icon: React.FC<IconProps> = ({ name, size = 24, className }) => {
+export const Icon: FC<IconProps> = ({ name, size = 24, className }) => {
   const [svg, setSvg] = useState<string | null>(null);
 
   useEffect(() => {

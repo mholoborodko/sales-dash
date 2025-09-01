@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
 import {
@@ -23,6 +24,6 @@ const appRoutes = [
   },
 ];
 
-export const Router = () => {
+export const Router: FC = () => {
   return useRoutes(appRoutes);
 };

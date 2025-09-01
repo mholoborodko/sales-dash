@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 
 export enum ButtonVariant {
   PRIMARY = 'PRIMARY',
@@ -31,7 +31,7 @@ const buttonStyles: Record<ButtonVariant, string> = {
     'bg-red-500 hover:bg-red-600 text-white disabled:bg-red-300',
 };
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button: FC<ButtonProps> = ({
   label,
   variant = ButtonVariant.PRIMARY,
   onClick,

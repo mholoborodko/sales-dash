@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { useToggle } from '@/shared/hooks';
 
@@ -9,7 +9,7 @@ interface AvatarProps {
   size?: number;
 }
 
-export const Avatar: React.FC<AvatarProps> = ({ src, size = 26 }) => {
+export const Avatar: FC<AvatarProps> = ({ src, size = 26 }) => {
   const isLoaded = useToggle(false);
 
   return (
