@@ -8,6 +8,7 @@ const items = [
   { label: 'Customers', to: '/customers', icon: 'customers' },
   { label: 'Orders', to: '/orders', icon: 'orders' },
   { label: 'Products', to: '/products', icon: 'products' },
+  { label: 'Reports', to: '/reports', icon: 'reports' },
 ];
 
 export const AppLayout: FC = () => {

@@ -6,6 +6,7 @@ import {
   DashboardPage,
   OrdersPage,
   ProductsPage,
+  ReportsPage,
 } from '@/pages';
 
 import { AppLayout } from '../layouts';
@@ -20,6 +21,7 @@ const appRoutes = [
       { path: 'customers', element: <CustomersPage /> },
       { path: 'orders', element: <OrdersPage /> },
       { path: 'products', element: <ProductsPage /> },
+      { path: 'reports', element: <ReportsPage /> },
     ],
   },
 ];
