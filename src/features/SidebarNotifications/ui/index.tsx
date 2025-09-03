@@ -87,7 +87,12 @@ export const SidebarNotifications: FC = () => {
                 style={{ transformOrigin: 'top right' }}
                 transition={{ type: 'spring', stiffness: 500, damping: 25 }}
               >
-                <h3 className="text-lg font-semibold mb-3">Notifications</h3>
+                <div className="flex items-end gap-2 mb-3">
+                  <button onClick={notificationToggle.off}>
+                    <Icon name="close" size={15} />
+                  </button>
+                  <h3 className="text-lg font-semibold">Notifications</h3>
+                </div>
 
                 <LoaderContainer
                   customLoader={<NotificationsSkeleton />}
