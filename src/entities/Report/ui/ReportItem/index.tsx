@@ -28,7 +28,7 @@ export const ReportItem: FC<ReportItemProps> = ({
 
   return (
     <div className="p-5 bg-white rounded-xl shadow-sm hover:shadow-md transition cursor-pointer">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-3">
           <div className="flex items-center justify-center size-10 rounded-full bg-blue-50">
             <Icon className="text-blue-500" name="report" size={18} />
@@ -47,16 +47,18 @@ export const ReportItem: FC<ReportItemProps> = ({
         </Dropdown>
       </div>
 
-      <div className="flex items-center justify-between mt-4 text-xs text-gray-500">
+      <div className="flex items-center justify-between flex-wrap gap-2 mt-4 text-xs text-gray-500">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1">
             <Icon className="text-gray-400" name="user" size={14} />
-            <span className="truncate max-w-[140px]">{author}</span>
+            <span className="truncate max-w-[100px]">{author}</span>
           </div>
           <span className="text-gray-300">•</span>
           <div className="flex items-center gap-1">
             <Icon className="text-gray-400" name="calendar" size={14} />
-            <span>{toDateFormat(date, DateFormat.MONTH_DAY_YEAR)}</span>
+            <span className="whitespace-nowrap">
+              {toDateFormat(date, DateFormat.MONTH_DAY_YEAR)}
+            </span>
           </div>
         </div>
 
