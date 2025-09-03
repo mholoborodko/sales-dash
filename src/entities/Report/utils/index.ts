@@ -1,7 +1,7 @@
 import { ReportType } from '@/entities/Report';
 import { BadgeVariant } from '@/shared/ui/Badge';
 
-export function getReportTypeColor(type: ReportType): BadgeVariant {
+export function getReportTypeBadgeColor(type: ReportType): BadgeVariant {
   const reportTypeColorMap: Record<ReportType, BadgeVariant> = {
     [ReportType.CUSTOMERS]: BadgeVariant.ORANGE,
     [ReportType.FINANCE]: BadgeVariant.BLUE,

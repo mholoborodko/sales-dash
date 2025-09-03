@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from 'react';
 import {
   ReportItem,
   ReportModel,
+  REPORTS_TITLES,
   ReportsSkeleton,
   ReportType,
 } from '@/entities/Report';
@@ -11,14 +12,7 @@ import { Button, LoaderContainer } from '@/shared/ui';
 
 const reports: ReportModel[] = Array.from({ length: 20 }).map(() => ({
   id: faker.string.uuid(),
-  title: faker.helpers.arrayElement([
-    'Monthly Sales Report',
-    'Customer Growth Analysis',
-    'Top Products Report',
-    'Revenue vs Expenses',
-    'Regional Sales Breakdown',
-    'Refunds & Returns',
-  ]),
+  title: faker.helpers.arrayElement(REPORTS_TITLES),
   description: faker.lorem.sentence(10),
   date: faker.date.recent({ days: 30 }).toISOString(),
   type: faker.helpers.arrayElement(Object.keys(ReportType)) as ReportType,

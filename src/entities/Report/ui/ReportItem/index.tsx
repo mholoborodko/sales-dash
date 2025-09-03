@@ -6,7 +6,7 @@ import { DropdownOption } from '@/shared/ui/Dropdown';
 import { convertEnumToString, toDateFormat } from '@/shared/utils';
 
 import { ReportModel } from '../../model';
-import { getReportTypeColor } from '../../utils';
+import { getReportTypeBadgeColor } from '../../utils';
 
 interface ReportItemProps extends ReportModel {}
 
@@ -63,7 +63,7 @@ export const ReportItem: FC<ReportItemProps> = ({
         <Badge
           className="text-xs"
           label={convertEnumToString(type)}
-          variant={getReportTypeColor(type)}
+          variant={getReportTypeBadgeColor(type)}
         />
       </div>
     </div>
