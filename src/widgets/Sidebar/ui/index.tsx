@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import { SidebarNotifications } from '@/features';
 import logo from '@/shared/assets/icons/logo.svg';
 import smallLogo from '@/shared/assets/icons/small-logo.svg';
 import { Avatar, Icon } from '@/shared/ui';
@@ -21,8 +22,17 @@ export const Sidebar: FC<SidebarProps> = ({ items }) => {
 
   return (
     <aside className="sticky top-0 h-screen w-20 lg:w-60 bg-[#1f1b2e] text-white p-4 shadow-lg flex flex-col">
-      <img alt="logo" className="hidden lg:block" src={logo} width={150} />
-      <img alt="logo" className="lg:hidden block" src={smallLogo} width={48} />
+      <div className="flex flex-col gap-5 align-middle lg:flex-row items-center justify-between">
+        <img alt="logo" className="hidden lg:block" src={logo} width={150} />
+        <img
+          alt="logo"
+          className="lg:hidden block"
+          src={smallLogo}
+          width={48}
+        />
+
+        <SidebarNotifications />
+      </div>
 
       <nav className="mt-8 flex flex-col flex-1 gap-2">
         {items.map(item => {

@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { Skeleton } from '@/shared/ui';
+
 export const ProductsGridSkeleton: FC = () => {
   return (
     <div className="grid grid-cols-4 gap-4">
@@ -8,13 +10,13 @@ export const ProductsGridSkeleton: FC = () => {
           key={index}
           className="animate-pulse flex flex-col gap-2 p-4 border rounded-xl shadow-sm"
         >
-          <div className="w-full h-40 bg-gray-200 rounded-lg" />
-          <div className="h-8 bg-gray-200 rounded w-3/4" />
-          <div className="h-4 bg-gray-200 rounded w-24">
-            <span className="block h-full bg-gray-200 rounded" />
+          <Skeleton className="rounded-lg" height="10rem" width="100%" />
+          <Skeleton className="rounded-md" height="2rem" width="75%" />
+          <Skeleton className="rounded-md" height="1rem" width="6rem" />
+          <Skeleton className="rounded-md" height="2rem" width="100%" />
+          <div className="mt-auto">
+            <Skeleton className="rounded-md" height="2rem" width="5rem" />
           </div>
-          <div className="h-8 bg-gray-200 rounded w-full" />
-          <div className="mt-auto h-8 bg-gray-300 rounded w-20" />
         </div>
       ))}
     </div>
