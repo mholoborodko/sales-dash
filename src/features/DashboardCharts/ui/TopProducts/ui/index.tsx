@@ -51,7 +51,7 @@ export const TopProducts: FC = () => {
             width={60}
           />
           <Tooltip />
-          <Bar dataKey="sales" fill="#22C55E" radius={[0, 4, 4, 0]} />
+          <Bar dataKey="sales" fill="#14b8a6" radius={[0, 4, 4, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </DashboardChartSection>

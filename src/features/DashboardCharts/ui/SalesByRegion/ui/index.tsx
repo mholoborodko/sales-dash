@@ -30,7 +30,7 @@ export const SalesByRegion: FC = () => {
           <Tooltip />
           <Legend />
           <Bar dataKey="online" fill="#6366F1" stackId="a" />
-          <Bar dataKey="retail" fill="#22C55E" stackId="a" />
+          <Bar dataKey="retail" fill="#14b8a6" stackId="a" />
         </BarChart>
       </ResponsiveContainer>
     </DashboardChartSection>
