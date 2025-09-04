@@ -15,7 +15,7 @@ import {
 interface ProductDetailsDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  product: Product;
+  product: Product | undefined;
 }
 
 export const ProductDetailsDrawer: FC<ProductDetailsDrawerProps> = ({
@@ -24,6 +24,10 @@ export const ProductDetailsDrawer: FC<ProductDetailsDrawerProps> = ({
   product,
 }) => {
   const isLoadedProductImage = useToggle(false);
+
+  if (!product) {
+    return null;
+  }
 
   return (
     <SideDrawer

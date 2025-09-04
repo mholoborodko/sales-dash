@@ -8,10 +8,12 @@ import { Avatar } from '@/shared/ui/Avatar';
 import { BadgeVariant } from '@/shared/ui/Badge';
 import { convertEnumToString, toDateFormat } from '@/shared/utils';
 
+import { MoreCell } from '../ui/MoreCell';
+
 const columnHelper = createColumnHelper<Customer>();
 
 interface UseCustomersTableColumnsProps {
-  openCustomerDetails: () => void;
+  openCustomerDetails: (customerId: string) => void;
 }
 
 export const useCustomersTableColumns = ({
@@ -23,6 +25,7 @@ export const useCustomersTableColumns = ({
         header: 'Full Name',
         cell: ctx => {
           const {
+            id,
             customer: { photo, fullName },
           } = ctx.row.original;
           return (
@@ -30,7 +33,7 @@ export const useCustomersTableColumns = ({
               <Avatar src={photo} />
               <span
                 className="hover:opacity-80 line-clamp-1"
-                onClick={openCustomerDetails}
+                onClick={() => openCustomerDetails(id)}
               >
                 {fullName}
               </span>
@@ -90,8 +93,17 @@ export const useCustomersTableColumns = ({
           />
         ),
         meta: {
-          headerClassName: 'text-center',
+          headerClassName: 'text-center border-r-0',
           cellClassName: 'text-center',
+        },
+      }),
+      columnHelper.display({
+        id: 'more',
+        cell: MoreCell,
+        meta: {
+          headerClassName: 'text-center border-l-0',
+          cellClassName: 'text-center',
+          width: 65,
         },
       }),
     ];

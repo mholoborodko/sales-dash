@@ -11,10 +11,12 @@ import {
   getProductStatusColor,
 } from '@/shared/utils';
 
+import { MoreCell } from '../ui/MoreCell';
+
 const columnHelper = createColumnHelper<Product>();
 
 interface UseProductsTableColumnsProps {
-  openProductDetails: () => void;
+  openProductDetails: (productId: number) => void;
 }
 
 export const useProductsTableColumns = ({
@@ -25,7 +27,7 @@ export const useProductsTableColumns = ({
       columnHelper.accessor('id', {
         header: 'Product ID',
         cell: ({ getValue }) => (
-          <span onClick={openProductDetails}>
+          <span onClick={() => openProductDetails(getValue())}>
             #{getValue().toString().padStart(6, '0')}
           </span>
         ),
@@ -69,8 +71,17 @@ export const useProductsTableColumns = ({
           />
         ),
         meta: {
-          headerClassName: 'text-center w-[140px]',
+          headerClassName: 'text-center w-[140px] border-r-0',
           cellClassName: 'text-center',
+        },
+      }),
+      columnHelper.display({
+        id: 'more',
+        cell: MoreCell,
+        meta: {
+          headerClassName: 'text-center border-l-0',
+          cellClassName: 'text-center',
+          width: 65,
         },
       }),
     ];

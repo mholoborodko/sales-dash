@@ -38,6 +38,7 @@ export const Table = <TData,>({
               {headerGroup.headers.map(header => {
                 const headerClass =
                   header.column.columnDef.meta?.headerClassName;
+
                 return (
                   <th
                     key={header.id}
@@ -45,6 +46,7 @@ export const Table = <TData,>({
                       'px-4 py-2 text-gray-700 font-semibold border border-gray-200',
                       headerClass
                     )}
+                    style={{ width: header.column.columnDef.meta?.width }}
                   >
                     {header.isPlaceholder
                       ? null
@@ -63,6 +65,7 @@ export const Table = <TData,>({
             <tr key={row.id}>
               {row.getVisibleCells().map(cell => {
                 const cellClass = cell.column.columnDef.meta?.cellClassName;
+
                 return (
                   <td
                     key={cell.id}
@@ -70,6 +73,7 @@ export const Table = <TData,>({
                       'px-4 py-2 text-black border border-gray-200',
                       cellClass
                     )}
+                    style={{ width: cell.column.columnDef.meta?.width }}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>

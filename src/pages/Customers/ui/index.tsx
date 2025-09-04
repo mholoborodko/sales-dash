@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { CustomerDetailsDrawer } from '@/features';
 import { useToggle } from '@/shared/hooks';
@@ -7,7 +7,7 @@ import { Button, LoaderContainer, Table, TableLoader } from '@/shared/ui';
 
 import { useCustomersTableColumns } from '../hooks/useCustomersTableColumns';
 
-const data = Array.from({ length: 20 }, () => ({
+const customers = Array.from({ length: 20 }, () => ({
   id: faker.string.uuid(),
   customer: {
     fullName: faker.person.fullName(),
@@ -23,13 +23,30 @@ const data = Array.from({ length: 20 }, () => ({
 }));
 
 export const CustomersPage: FC = () => {
+  const [loading, setLoading] = useState(true);
+  const [selectedCustomerId, setSelectedCustomerId] = useState<string>('');
+
   const customerDetailsDrawer = useToggle(false);
 
+  const handleReportClick = useCallback(
+    (reportId: string) => {
+      setSelectedCustomerId(reportId);
+
+      setTimeout(() => {
+        customerDetailsDrawer.on();
+      }, 10);
+    },
+    [customerDetailsDrawer]
+  );
+
   const customerColumns = useCustomersTableColumns({
-    openCustomerDetails: customerDetailsDrawer.on,
+    openCustomerDetails: handleReportClick,
   });
 
-  const [loading, setLoading] = useState(true);
+  const selectedCustomer = useMemo(
+    () => customers.find(({ id }) => id === selectedCustomerId),
+    [selectedCustomerId]
+  );
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
@@ -46,11 +63,15 @@ export const CustomersPage: FC = () => {
         isLoading={loading}
         loaderClassName="mt-3"
       >
-        <Table className="mt-3" columns={customerColumns} data={data || []} />
+        <Table
+          className="mt-3"
+          columns={customerColumns}
+          data={customers || []}
+        />
       </LoaderContainer>
 
       <CustomerDetailsDrawer
-        customer={data[0]}
+        customer={selectedCustomer}
         isOpen={customerDetailsDrawer.value}
         onClose={customerDetailsDrawer.off}
       />

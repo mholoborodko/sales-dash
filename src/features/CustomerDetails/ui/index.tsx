@@ -14,7 +14,7 @@ import { BadgeVariant } from '@/shared/ui/Badge';
 import { convertEnumToString } from '@/shared/utils';
 
 interface CustomerDetailsDrawerProps {
-  customer: Customer;
+  customer: Customer | undefined;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -24,6 +24,10 @@ export const CustomerDetailsDrawer: FC<CustomerDetailsDrawerProps> = ({
   isOpen,
   onClose,
 }) => {
+  if (!customer) {
+    return null;
+  }
+
   return (
     <SideDrawer
       isOpen={isOpen}

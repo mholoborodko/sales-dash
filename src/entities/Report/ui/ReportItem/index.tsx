@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { DateFormat } from '@/shared/constants';
-import { Badge, Dropdown, Icon } from '@/shared/ui';
+import { Badge, ContextMenu, Icon } from '@/shared/ui';
 import { DropdownOption } from '@/shared/ui/Dropdown';
 import { convertEnumToString, toDateFormat } from '@/shared/utils';
 
@@ -46,13 +46,7 @@ export const ReportItem: FC<ReportItemProps> = ({
           </h3>
         </div>
 
-        <Dropdown options={options}>
-          {() => (
-            <button className="flex-center p-1 rounded-md bg-gray-100 hover:bg-gray-200 transition-colors">
-              <Icon name="more" size={20} />
-            </button>
-          )}
-        </Dropdown>
+        <ContextMenu options={options} />
       </div>
 
       <div className="flex items-center justify-between flex-wrap gap-2 mt-4 text-xs text-gray-500">

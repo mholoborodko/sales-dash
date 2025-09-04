@@ -11,3 +11,4 @@ export { Avatar } from './Avatar';
 export { DetailsModalSection } from './DetailsModalSection';
 export { DetailsModalInfoRow } from './DetailsModalInfoRow';
 export { Dropdown } from './Dropdown';
+export { ContextMenu } from './ContextMenu';

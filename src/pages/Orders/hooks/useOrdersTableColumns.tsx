@@ -12,10 +12,12 @@ import {
   toDateFormat,
 } from '@/shared/utils';
 
+import { MoreCell } from '../ui/MoreCell';
+
 const columnHelper = createColumnHelper<Order>();
 
 interface UseOrdersTableColumnsProps {
-  openOrderDetails: () => void;
+  openOrderDetails: (orderId: number) => void;
 }
 
 export const useOrdersTableColumns = ({
@@ -26,7 +28,7 @@ export const useOrdersTableColumns = ({
       columnHelper.accessor('id', {
         header: 'Order ID',
         cell: ({ getValue }) => (
-          <span onClick={openOrderDetails}>
+          <span onClick={() => openOrderDetails(getValue())}>
             #{getValue().toString().padStart(6, '0')}
           </span>
         ),
@@ -95,8 +97,17 @@ export const useOrdersTableColumns = ({
           />
         ),
         meta: {
-          headerClassName: 'text-center',
+          headerClassName: 'text-center border-r-0',
           cellClassName: 'text-center',
+        },
+      }),
+      columnHelper.display({
+        id: 'more',
+        cell: MoreCell,
+        meta: {
+          headerClassName: 'text-center border-l-0',
+          cellClassName: 'text-center',
+          width: 65,
         },
       }),
     ];

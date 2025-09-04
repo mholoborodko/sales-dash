@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import clsx from 'clsx';
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import {
   ProductCard,
@@ -14,7 +14,7 @@ import { Icon, LoaderContainer, Table, TableLoader } from '@/shared/ui';
 
 import { useProductsTableColumns } from '../hooks/useProductsTableColumns';
 
-export const data = Array.from({ length: 20 }, () => ({
+export const products = Array.from({ length: 20 }, () => ({
   id: faker.number.int({ min: 1000, max: 9999 }),
   name: faker.commerce.productName(),
   description: faker.commerce.productDescription(),
@@ -31,14 +31,30 @@ export const data = Array.from({ length: 20 }, () => ({
 
 export const ProductsPage: FC = () => {
   const [view, setView] = useState<ProductViewMode>(ProductViewMode.GRID);
+  const [loading, setLoading] = useState(true);
+  const [selectedProductId, setSelectedProductId] = useState<number>(0);
 
   const productDetailsDrawer = useToggle(false);
 
-  const ordersColumns = useProductsTableColumns({
-    openProductDetails: productDetailsDrawer.on,
+  const handleProductClick = useCallback(
+    (orderId: number) => {
+      setSelectedProductId(orderId);
+
+      setTimeout(() => {
+        productDetailsDrawer.on();
+      }, 10);
+    },
+    [productDetailsDrawer]
+  );
+
+  const productsColumns = useProductsTableColumns({
+    openProductDetails: handleProductClick,
   });
 
-  const [loading, setLoading] = useState(true);
+  const selectedProduct = useMemo(
+    () => products.find(({ id }) => id === selectedProductId),
+    [selectedProductId]
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -89,7 +105,7 @@ export const ProductsPage: FC = () => {
           loaderClassName="mt-2"
         >
           <div className="mt-2 grid grid-cols-4 gap-4">
-            {data.map(product => (
+            {products.map(product => (
               <ProductCard key={product.id} {...product} />
             ))}
           </div>
@@ -102,13 +118,17 @@ export const ProductsPage: FC = () => {
           isLoading={loading}
           loaderClassName="mt-2"
         >
-          <Table className="mt-2" columns={ordersColumns} data={data || []} />
+          <Table
+            className="mt-2"
+            columns={productsColumns}
+            data={products || []}
+          />
         </LoaderContainer>
       )}
 
       <ProductDetailsDrawer
         isOpen={productDetailsDrawer.value}
-        product={data[0]}
+        product={selectedProduct}
         onClose={productDetailsDrawer.off}
       />
     </div>

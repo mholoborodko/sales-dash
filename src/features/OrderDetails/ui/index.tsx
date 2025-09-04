@@ -17,7 +17,7 @@ import {
 } from '@/shared/utils';
 
 interface OrderDetailsDrawerProps {
-  order: Order;
+  order: Order | undefined;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -27,6 +27,10 @@ export const OrderDetailsDrawer: FC<OrderDetailsDrawerProps> = ({
   isOpen,
   onClose,
 }) => {
+  if (!order) {
+    return null;
+  }
+
   return (
     <SideDrawer
       isOpen={isOpen}

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { OrderStatus, PaymentMethod } from '@/entities/Order';
 import { OrderDetailsDrawer } from '@/features';
@@ -8,7 +8,7 @@ import { Button, LoaderContainer, Table, TableLoader } from '@/shared/ui';
 
 import { useOrdersTableColumns } from '../hooks/useOrdersTableColumns';
 
-const data = Array.from({ length: 10 }, () => ({
+const orders = Array.from({ length: 10 }, () => ({
   id: faker.number.int({ min: 1000, max: 9999 }),
   customer: {
     fullName: faker.person.fullName(),
@@ -25,13 +25,30 @@ const data = Array.from({ length: 10 }, () => ({
 }));
 
 export const OrdersPage: FC = () => {
+  const [loading, setLoading] = useState(true);
+  const [selectedOrderId, setSelectedOrderId] = useState<number>(0);
+
   const orderDetailsDrawer = useToggle(false);
 
+  const handleOrderClick = useCallback(
+    (orderId: number) => {
+      setSelectedOrderId(orderId);
+
+      setTimeout(() => {
+        orderDetailsDrawer.on();
+      }, 10);
+    },
+    [orderDetailsDrawer]
+  );
+
   const ordersColumns = useOrdersTableColumns({
-    openOrderDetails: orderDetailsDrawer.on,
+    openOrderDetails: handleOrderClick,
   });
 
-  const [loading, setLoading] = useState(true);
+  const selectedOrder = useMemo(
+    () => orders.find(({ id }) => id === selectedOrderId),
+    [selectedOrderId]
+  );
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
@@ -49,12 +66,12 @@ export const OrdersPage: FC = () => {
         isLoading={loading}
         loaderClassName="mt-3"
       >
-        <Table className="mt-3" columns={ordersColumns} data={data || []} />
+        <Table className="mt-3" columns={ordersColumns} data={orders || []} />
       </LoaderContainer>
 
       <OrderDetailsDrawer
         isOpen={orderDetailsDrawer.value}
-        order={data[0]}
+        order={selectedOrder}
         onClose={orderDetailsDrawer.off}
       />
     </div>
