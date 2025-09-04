@@ -11,7 +11,8 @@ import {
   Legend,
 } from 'recharts';
 
-import { DashboardChartSection, MONTHS } from '@/features/DashboardCharts';
+import { DashboardChartSection } from '@/features/DashboardCharts';
+import { MONTHS } from '@/shared/constants';
 
 const revenueVsExpenses = MONTHS.map(m => ({
   name: m,

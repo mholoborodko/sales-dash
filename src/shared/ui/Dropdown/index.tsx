@@ -54,7 +54,13 @@ export const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <div ref={dropdownRef} className="relative inline-block">
-      <div ref={refs.setReference} onClick={() => setIsOpen(prev => !prev)}>
+      <div
+        ref={refs.setReference}
+        onClick={e => {
+          e.stopPropagation();
+          setIsOpen(prev => !prev);
+        }}
+      >
         {typeof children === 'function' ? children({ isOpen }) : children}
       </div>
 

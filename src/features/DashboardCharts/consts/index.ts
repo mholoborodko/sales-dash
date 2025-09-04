@@ -1,19 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-export const MONTHS = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
-];
+import { MONTHS } from '@/shared/constants';
 
 export const COLORS = ['#6366F1', '#22C55E', '#F97316', '#E11D48'];
 

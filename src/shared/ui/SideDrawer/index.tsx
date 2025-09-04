@@ -12,6 +12,7 @@ interface SideDrawerProps {
   title?: string;
   className?: string;
   width?: string;
+  rightComponent?: React.ReactNode;
 }
 
 export const SideDrawer: FC<SideDrawerProps> = ({
@@ -21,31 +22,36 @@ export const SideDrawer: FC<SideDrawerProps> = ({
   title,
   className,
   width = '24rem',
+  rightComponent,
 }) => {
   return (
     <Drawer
       enableOverlay
       lockBackgroundScroll
-      className={clsx('p-5 h-screen bg-white shadow-xl', className)}
+      className={clsx('h-screen bg-white shadow-xl flex flex-col', className)}
       direction="right"
       open={isOpen}
       style={{ width }}
       onClose={onClose}
     >
-      <div className="flex items-center justify-between mb-4">
-        {title && <h2 className="text-lg font-semibold">{title}</h2>}
-        <button
-          className="text-gray-500 hover:text-gray-700"
-          onClick={e => {
-            e.stopPropagation();
-            onClose();
-          }}
-        >
-          <Icon name="close" size={24} />
-        </button>
+      <div className="flex items-center justify-between gap-2 p-5 border-b border-gray-200">
+        <div className="flex items-center gap-2">
+          <button
+            className="flex flex-center text-gray-500 hover:text-gray-700"
+            onClick={e => {
+              e.stopPropagation();
+              onClose();
+            }}
+          >
+            <Icon name="close" size={18} />
+          </button>
+          {title && <h2 className="text-lg font-semibold">{title}</h2>}
+        </div>
+
+        {rightComponent}
       </div>
-      <hr className="border-t border-gray-200 my-4" />
-      <div className="flex-1 overflow-y-auto">{children}</div>
+
+      <div className="flex-1 overflow-y-auto p-5">{children}</div>
     </Drawer>
   );
 };

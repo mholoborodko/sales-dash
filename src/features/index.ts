@@ -4,3 +4,4 @@ export * from './ProductDetails';
 export * from './DashboardCharts';
 export * from './DashboardKpi';
 export * from './SidebarNotifications';
+export * from './ReportDetails';

@@ -8,13 +8,17 @@ import { convertEnumToString, toDateFormat } from '@/shared/utils';
 import { ReportModel } from '../../model';
 import { getReportTypeBadgeColor } from '../../utils';
 
-interface ReportItemProps extends ReportModel {}
+interface ReportItemProps extends ReportModel {
+  onReportClick: (reportId: string) => void;
+}
 
 export const ReportItem: FC<ReportItemProps> = ({
+  id,
   title,
   author,
   date,
   type,
+  onReportClick,
 }) => {
   const options: DropdownOption[] = [
     {
@@ -27,7 +31,11 @@ export const ReportItem: FC<ReportItemProps> = ({
   ];
 
   return (
-    <div className="p-5 bg-white rounded-xl shadow-sm hover:shadow-md transition cursor-pointer">
+    <div
+      className="p-5 bg-white rounded-xl shadow-sm hover:shadow-md transition cursor-pointer"
+      role="button"
+      onClick={() => onReportClick(id)}
+    >
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-3">
           <div className="flex items-center justify-center size-10 rounded-full bg-blue-50">
